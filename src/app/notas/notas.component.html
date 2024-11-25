@@ -1,1 +1,77 @@
-<p>notas works!</p>
+<div class="container">
+    <!-- Modal Create -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" >Nueva Nota</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form class="form" [formGroup]="notaForm">             
+              <label for="titulo" class="form-label">Título</label>
+              <input type="text" id="titulo" class="form-control" name="titulo" formControlName="titulo">
+              <br>
+              <label for="contenido" class="form-label">Contenido</label>
+              <input type="text" id="contenido" class="form-control" name="contenido" formControlName="contenido">
+              <br>
+              <button type="submit" class="btn btn-success" [disabled]="!notaForm.valid" (click)="agregar_nota()" data-bs-dismiss="modal">Create</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Update -->
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="UpdateLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" >Nueva Nota</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form class="form" [formGroup]="notaForm">              
+              <label for="titulo" class="form-label">Título</label>
+              <input type="text" id="titulo" class="form-control" name="titulo" formControlName="titulo">
+              <br>
+              <label for="contenido" class="form-label">Título</label>
+              <input type="text" id="contenido" class="form-control" name="contenido" formControlName="contenido">
+              <br>
+              <button type="submit" class="btn btn-success" [disabled]="!notaForm.valid" (click)="actualizar_nota()" data-bs-dismiss="modal">Update</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="nueva_nota()">
+      Nueva Nota
+    </button>
+      <br><br>
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Título</th>
+              <th scope="col">Contenido</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let nota of notas">
+              <th scope="row">{{ nota.id }}</th>
+              <td>{{ nota.titulo }}</td>
+              <td>{{ nota.titulo }}</td>
+              <td>{{ nota.fecha | date:'mediumDate' }}</td>
+              <td><a class="btn btn-warning" (click)="see_update(nota)" data-bs-toggle="modal" data-bs-target="#updateModal">update</a> <a class="btn btn-danger" (click)="borrar_Nota(nota)">delete</a></td>
+            </tr>
+          </tbody>
+        </table>
+  </div>
+
